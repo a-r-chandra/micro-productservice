@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProductService.Models;
+using static Utilities.NetworkUtils;
 
 namespace ProductService.Controllers
 {
@@ -12,11 +13,16 @@ namespace ProductService.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        private IHttpContextAccessor _httpContextAccessor;
+        public ProductsController(IHttpContextAccessor httpContextAccessor) {
+            _httpContextAccessor = httpContextAccessor;
+        }
+                
         // GET: api/Products
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public Tuple<IEnumerable<Product>,string> Get()
         {
-            return new Product[] {
+            return new Tuple<IEnumerable<Product>, string>(new Product[] {
                 new Product {
                     id = "978-1717075901",
                     title = "Microservices: A Practical Guide",
@@ -33,7 +39,8 @@ namespace ProductService.Controllers
                     quantity = 14,
                     category = "books"
                 }
-            };
+            }, $"Called from: {GetRequestInfo(_httpContextAccessor)} " +
+            $" | Handled by machine: {Environment.MachineName}, IP: [{GetIPs()}], OS: {Environment.OSVersion}");
         }
 
         // GET: api/Products/5
@@ -48,17 +55,6 @@ namespace ProductService.Controllers
         public void Post([FromBody] string value)
         {
         }
-
-        // PUT: api/Products/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+       
     }
 }
