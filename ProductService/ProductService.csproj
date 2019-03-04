@@ -14,7 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\common\Utilities.csproj" />
+    <Reference Include="Utilities">
+      <HintPath>..\Dependencies\Utilities.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
