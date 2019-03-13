@@ -30,14 +30,6 @@ namespace ProductService.Controllers
                     price = 36.90,
                     quantity = 65,
                     category = "books"
-                },
-                new Product {
-                    id = "978-1788479356",
-                    title = "Learning Continuous Integration with Jenkins",
-                    description = "This book starts off by explaining the concepts of CI and its significance in the Agile world with a whole chapter dedicated to it. Next, you'll learn to configure and set up Jenkins in many favourite ways. The way the world sees CI/CD is changing, and so is Jenkins.",
-                    price = 44.99,
-                    quantity = 14,
-                    category = "books"
                 }
             }, $"Called from: {GetRequestInfo(_httpContextAccessor)} " +
             $" | Handled by machine: {Environment.MachineName}, IP: [{GetIPs()}], OS: {Environment.OSVersion}");
